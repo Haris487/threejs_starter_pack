@@ -6,12 +6,13 @@ export class Singleton {
   constructor(){
     if(!this.instance){
       this.scene = new THREE.Scene();
-      this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      this.camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
       this.loadingScreen = this.createLoadingScreen();
       this.light = new THREE.AmbientLight( 0xffffff );
       this.clock = new THREE.Clock();
       this.delta = this.clock.getDelta();
       this.THREE = THREE;
+      this.debug = {};
     }
     else{
       throw new Error("Singleton class can not create its another instance");
@@ -27,6 +28,10 @@ export class Singleton {
       this.instance = new Singleton()
     }
     return this.instance;
+  }
+
+  addDebug(name,obj){
+    this.debug[""+name] = obj;
   }
 
   load(){
